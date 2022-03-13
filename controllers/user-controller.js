@@ -23,6 +23,10 @@ const userController = {
 				path: "thoughts",
 				select: "-__v",
 			})
+			.populate({
+				path: "friends",
+				select: "-__v",
+			})
 			.select("-__v")
 			.then((dbUserData) => {
 				// If no user is found, send 404
@@ -70,9 +74,10 @@ const userController = {
 
 	//add a friend
 	addFriend({ params }, res) {
+		console.log(params);
 		User.findOneAndUpdate(
 			{ _id: params.userId },
-			{ $push: { friends: params.friendId } },
+			{ $push: { friends: params.friendsId } },
 			{ new: true }
 		)
 			.then((dbUserData) => {
@@ -89,7 +94,7 @@ const userController = {
 	deleteFriend({ params }, res) {
 		User.findOneAndUpdate(
 			{ _id: params.userId },
-			{ $pull: { friends: params.friendId } },
+			{ $pull: { friends: params.friendsId } },
 			{ new: true }
 		)
 			.then((dbFriendData) => res.json(dbFriendData))
