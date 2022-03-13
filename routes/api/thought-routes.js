@@ -7,14 +7,16 @@ const {
 	deleteThought,
 } = require("../../controllers/thought-controller");
 
-// Set up GET all and POST at /api/thoughts
-router.route("/").get(getAllThought).post(createThought);
+// Set up GET all at /api/thoughts
+router.route("/").get(getAllThought);
 
-// Set up GET one, PUT, and DELETE at /api/thoughts/:id
-router
-	.route("/:id")
-	.get(getThoughtById)
-	.put(updateThought)
-	.delete(deleteThought);
+// Set up POST route to include associated user id
+router.route("/:userId").post(createThought);
+
+// Set up GET one and PUT at /api/thoughts/:id
+router.route("/:thoughtId").get(getThoughtById).put(updateThought);
+
+// Set up DELETE
+router.route("/:userId/:thoughtid").delete(deleteThought);
 
 module.exports = router;
