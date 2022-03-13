@@ -17,6 +17,6 @@ router.route("/:userId").post(createThought);
 router.route("/:thoughtId").get(getThoughtById).put(updateThought);
 
 // Set up DELETE
-router.route("/:userId/:thoughtid").delete(deleteThought);
+router.route("/:userId/:thoughtId").delete(deleteThought);
 
 module.exports = router;

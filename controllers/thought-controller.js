@@ -63,8 +63,9 @@ const thoughtController = {
 		Thought.findOneAndDelete({ _id: params.thoughtId })
 			.then((dbThoughtData) => {
 				if (!dbThoughtData) {
-					res.status(404).json({ message: "No thought found with this id!" });
-					return;
+					return res
+						.status(404)
+						.json({ message: "No thought found with this id!" });
 				}
 				return User.findOneAndUpdate(
 					{ _id: params.userId },
